@@ -1,0 +1,13 @@
+#ui {
+  position: absolute;
+  font-family: monospace;
+  color: white;
+  font-size: 2rem;
+}
+
+button {
+  font-family: monospace;
+  background: white;
+  font-size: 2rem;
+  border-radius: 4px;
+}
