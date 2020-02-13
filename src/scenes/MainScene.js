@@ -59,6 +59,11 @@ class MainScene extends Phaser.Scene {
       levelName: currentMap.name
     });
 
+    const keyObj = this.input.keyboard.addKey("R"); // Get key object
+    keyObj.on("down", event => {
+      this.scene.restart();
+    });
+
     const map = this.add.tilemap(currentMap.name);
     const tileset = map.addTilesetImage("tileset", "tiles"); // key: texture key
     const layer = map.createStaticLayer("ground", tileset);
