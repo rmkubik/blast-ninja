@@ -127,13 +127,22 @@ class MainScene extends Phaser.Scene {
       ) {
         if (!this.resetting) {
           this.resetting = true;
+          console.log("goal!");
+          setTimeout(
+            () => this.emitter.explode(50, ninja.x + 32, ninja.y - 48),
+            300
+          );
+          this.emitter.explode(50, ninja.x, ninja.y - 64);
+          setTimeout(
+            () => this.emitter.explode(50, ninja.x - 32, ninja.y - 48),
+            600
+          );
 
           setTimeout(() => {
-            console.log("goal!");
             this.currentLevel = (this.currentLevel + 1) % this.levels.length;
             this.scene.restart();
             this.resetting = false;
-          }, 1000);
+          }, 1600);
         }
       }
     });
