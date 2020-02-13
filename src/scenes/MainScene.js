@@ -71,12 +71,6 @@ class MainScene extends Phaser.Scene {
       [-1, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
       true
     );
-    // layer.forEachTile(tile => {
-    //   this.physics.world.enable(tile);
-    //   console.log(tile);
-    //   tile.body.setFrictionX(0.7);
-    //   tile.body.setImmovable(true);
-    // });
 
     this.particles = this.add.particles("tiles");
     this.emitter = this.particles.createEmitter({
@@ -103,53 +97,15 @@ class MainScene extends Phaser.Scene {
     ninja.body.setGravityY(globals.gravity);
     ninja.body.setMaxVelocity(MAX_VELOCITY);
     this.ninja = ninja;
-    // ninja.update = () => {
-    //     this.physics.collide(ninja, layer);
-    // };
-    // ninja.body.setFrictionX(0.7);
-    // ninja.body.setDrag(15, 0);
 
-    const goals = this.add.group();
-    map
-      .createFromObjects("objects", "goal", {
-        key: "tiles",
-        frame: 0
-      })
-      .forEach(goal => {
-        goal.setVisible(false);
-        this.physics.world.enable(goal);
-        goal.body.setImmovable(true);
-        goal.body.setSize(goal.width, goal.height);
-        goals.add(goal);
-      });
-
-    this.physics.add.overlap(ninja, goals, (ninja, goal) => {
-      if (
-        // ninja.body.onFloor() &&
-        ninja.body.velocity.x === 0 &&
-        ninja.body.velocity.y > -1 &&
-        ninja.body.velocity.y < 1
-      ) {
-        if (!this.resetting) {
-          this.resetting = true;
-          console.log("goal!");
-          setTimeout(
-            () => this.emitter.explode(50, ninja.x + 32, ninja.y - 48),
-            300
-          );
-          this.emitter.explode(50, ninja.x, ninja.y - 64);
-          setTimeout(
-            () => this.emitter.explode(50, ninja.x - 32, ninja.y - 48),
-            600
-          );
-
-          setTimeout(() => {
-            this.currentLevel = (this.currentLevel + 1) % this.levels.length;
-            this.scene.restart();
-            this.resetting = false;
-          }, 1600);
-        }
-      }
+    this.goals = this.add.group();
+    const goalObjs = map.filterObjects("objects", obj => obj.type === "goal");
+    goalObjs.forEach(obj => {
+      const goal = this.add.rectangle(obj.x, obj.y, obj.width, obj.height);
+      goal.setOrigin(0);
+      this.physics.world.enable(goal);
+      goal.body.setImmovable(true);
+      this.goals.add(goal);
     });
 
     this.input.on("pointerdown", pointer => {
@@ -209,6 +165,35 @@ class MainScene extends Phaser.Scene {
       this.scene.restart();
       console.log("you fall for eternity");
     }
+
+    this.physics.overlap(this.ninja, this.goals, (ninja, goal) => {
+      if (
+        // ninja.body.onFloor() &&
+        ninja.body.velocity.x === 0 &&
+        ninja.body.velocity.y > -1 &&
+        ninja.body.velocity.y < 1
+      ) {
+        if (!this.resetting) {
+          this.resetting = true;
+          console.log("goal!");
+          setTimeout(
+            () => this.emitter.explode(50, ninja.x + 32, ninja.y - 48),
+            300
+          );
+          this.emitter.explode(50, ninja.x, ninja.y - 64);
+          setTimeout(
+            () => this.emitter.explode(50, ninja.x - 32, ninja.y - 48),
+            600
+          );
+
+          setTimeout(() => {
+            this.currentLevel = (this.currentLevel + 1) % this.levels.length;
+            this.scene.restart();
+            this.resetting = false;
+          }, 1600);
+        }
+      }
+    });
   }
 }
 
