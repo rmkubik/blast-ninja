@@ -203,7 +203,7 @@ class MainScene extends Phaser.Scene {
 
     const thickness = 1;
     const color = 0x29366f;
-    const alpha = 0.6;
+    const alpha = 0.3;
     this.graphics.lineStyle(thickness, color, alpha);
 
     this.rangeFinder.setPosition(this.ninja.x, this.ninja.y);
