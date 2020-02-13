@@ -153,25 +153,29 @@ class MainScene extends Phaser.Scene {
     });
 
     this.input.on("pointerdown", pointer => {
-      const origin = new Phaser.Math.Vector2(
-        ninja.x - pointer.x,
-        ninja.y - pointer.y
-      );
-      const SPEED = 3;
-      origin.scale(SPEED);
+      const ninjaPos = new Phaser.Math.Vector2(ninja.x, ninja.y);
+      const explosionPos = new Phaser.Math.Vector2(pointer.x, pointer.y);
 
-      this.bombCount += 1;
-      window.updateUI({
-        bombCounter: this.bombCount
-      });
+      const distance = ninjaPos.subtract(explosionPos);
 
-      ninja.body.setVelocity(origin.x, origin.y);
+      const MAX_DISTANCE = 100;
+      if (distance.length() <= MAX_DISTANCE) {
+        const MAX_POWER = 200;
+        const percentDistance = 1 - distance.length() / MAX_DISTANCE;
+        const magnitude = MAX_POWER * percentDistance;
+        const direction = distance.normalize();
 
-      // this.emitter.start();
-      // this.firingTimeout = setTimeout(() => {
-      //   this.emitter.stop();
-      // }, 400);
-      this.emitter.explode(50, pointer.x, pointer.y);
+        const explosionForce = direction.scale(magnitude);
+
+        this.bombCount += 1;
+        window.updateUI({
+          bombCounter: this.bombCount
+        });
+
+        ninja.body.setVelocity(explosionForce.x, explosionForce.y);
+
+        this.emitter.explode(50, pointer.x, pointer.y);
+      }
     });
 
     const FRICTION_VALUE = 2;
