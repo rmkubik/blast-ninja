@@ -73,6 +73,21 @@ class MainScene extends Phaser.Scene {
     //   tile.body.setImmovable(true);
     // });
 
+    this.particles = this.add.particles("tiles");
+    this.emitter = this.particles.createEmitter({
+      frame: [20],
+      speed: { min: -50, max: 50 },
+      angle: { min: 0, max: 360 },
+      gravityY: 100,
+      quantity: 2,
+      x: globals.width / 2,
+      y: globals.height,
+      // frequency: 600,
+      lifespan: 10000,
+      scale: { min: 0.2, max: 0.4 },
+      on: false
+    });
+
     const MAX_VELOCITY = 200;
     const [ninja] = map.createFromObjects("objects", "spawn", {
       key: "ninja"
@@ -137,6 +152,12 @@ class MainScene extends Phaser.Scene {
       });
 
       ninja.body.setVelocity(origin.x, origin.y);
+
+      // this.emitter.start();
+      // this.firingTimeout = setTimeout(() => {
+      //   this.emitter.stop();
+      // }, 400);
+      this.emitter.explode(50, pointer.x, pointer.y);
     });
 
     const FRICTION_VALUE = 2;
