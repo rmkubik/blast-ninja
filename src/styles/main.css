@@ -1,3 +1,7 @@
+body {
+  background-color: #3b5dc9;
+}
+
 #ui {
   position: absolute;
   font-family: monospace;

@@ -11,6 +11,8 @@ import map3 from "../../assets/map3.json";
 import map4 from "../../assets/map4.json";
 import map5 from "../../assets/map5.json";
 
+const MAX_DISTANCE = 100;
+
 /**
  * MainScene extends Phaser.Scene
  * https://photonstorm.github.io/phaser3-docs/Phaser.Scene.html
@@ -98,6 +100,9 @@ class MainScene extends Phaser.Scene {
     ninja.body.setMaxVelocity(MAX_VELOCITY);
     this.ninja = ninja;
 
+    this.graphics = this.add.graphics();
+    this.rangeFinder = new Phaser.Geom.Circle(ninja.x, ninja.y, MAX_DISTANCE);
+
     this.goals = this.add.group();
     const goalObjs = map.filterObjects("objects", obj => obj.type === "goal");
     goalObjs.forEach(obj => {
@@ -114,7 +119,6 @@ class MainScene extends Phaser.Scene {
 
       const distance = ninjaPos.subtract(explosionPos);
 
-      const MAX_DISTANCE = 100;
       if (distance.length() <= MAX_DISTANCE) {
         const MAX_POWER = 200;
         const percentDistance = 1 - distance.length() / MAX_DISTANCE;
@@ -194,6 +198,16 @@ class MainScene extends Phaser.Scene {
         }
       }
     });
+
+    this.graphics.clear();
+
+    const thickness = 1;
+    const color = 0x29366f;
+    const alpha = 0.6;
+    this.graphics.lineStyle(thickness, color, alpha);
+
+    this.rangeFinder.setPosition(this.ninja.x, this.ninja.y);
+    this.graphics.strokeCircleShape(this.rangeFinder);
   }
 }
 

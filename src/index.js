@@ -52,7 +52,7 @@ const game = new Phaser.Game(config);
 
 const body = document.querySelector("body");
 
-body.setAttribute("style", `background-color: ${globals.bgColor}`);
+// body.setAttribute("style", `background-color: ${globals.bgColor}`);
 
 /**
  * Enable Parcel hot module reloading
