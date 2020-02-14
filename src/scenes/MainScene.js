@@ -10,6 +10,10 @@ import map2 from "../../assets/map2.json";
 import map3 from "../../assets/map3.json";
 import map4 from "../../assets/map4.json";
 import map5 from "../../assets/map5.json";
+import map6 from "../../assets/map6.json";
+import map7 from "../../assets/map7.json";
+import map8 from "../../assets/map8.json";
+import map9 from "../../assets/map9.json";
 
 const MAX_DISTANCE = 100;
 
@@ -31,7 +35,11 @@ class MainScene extends Phaser.Scene {
       { name: "map2", par: 2 },
       { name: "map3", par: 2 },
       { name: "map4", par: 2 },
-      { name: "map5", par: 2 }
+      { name: "map5", par: 2 },
+      { name: "map6", par: 3 },
+      { name: "map7", par: 2 },
+      { name: "map8", par: 2 },
+      { name: "map9", par: 2 }
     ];
     this.resetting = false;
 
@@ -48,6 +56,10 @@ class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map3", map3);
     this.load.tilemapTiledJSON("map4", map4);
     this.load.tilemapTiledJSON("map5", map5);
+    this.load.tilemapTiledJSON("map6", map6);
+    this.load.tilemapTiledJSON("map7", map7);
+    this.load.tilemapTiledJSON("map8", map8);
+    this.load.tilemapTiledJSON("map9", map9);
     this.load.image("ninja", ninjaImage);
   }
 
@@ -79,7 +91,7 @@ class MainScene extends Phaser.Scene {
       frame: [20],
       speed: { min: -50, max: 50 },
       angle: { min: 0, max: 360 },
-      gravityY: 100,
+      gravityY: globals.gravity,
       quantity: 2,
       x: globals.width / 2,
       y: globals.height,
