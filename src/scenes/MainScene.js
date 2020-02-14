@@ -97,7 +97,7 @@ class MainScene extends Phaser.Scene {
       scale: { min: 0.2, max: 0.4 },
       on: false
     });
-
+    console.log(globals.width, globals.height);
     const MAX_VELOCITY = 200;
     const [ninja] = map.createFromObjects("objects", "spawn", {
       key: "ninja"

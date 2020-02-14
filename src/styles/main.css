@@ -1,5 +1,7 @@
 body {
   background-color: #3b5dc9;
+  margin: 0;
+  padding: 0;
 }
 
 #ui {
