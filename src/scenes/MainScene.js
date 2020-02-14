@@ -37,9 +37,9 @@ class MainScene extends Phaser.Scene {
       { name: "map4", par: 2 },
       { name: "map5", par: 2 },
       { name: "map6", par: 3 },
-      { name: "map7", par: 2 },
+      { name: "map7", par: 3 },
       { name: "map8", par: 2 },
-      { name: "map9", par: 2 }
+      { name: "map9", par: 4 }
     ];
     this.resetting = false;
 
