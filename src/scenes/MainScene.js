@@ -1,8 +1,5 @@
 import Phaser from "phaser";
 import globals from "../globals";
-// import donutSpriteSheet from "../../assets/donuts.png";
-// import Donut from "../gameObjects/Donut";
-// import Pipes from "../gameObjects/Pipes";
 import tilesetSpriteSheet from "../../assets/tileset.png";
 import ninjaImage from "../../assets/ninja.png";
 import map1 from "../../assets/map1.json";

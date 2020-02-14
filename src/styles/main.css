@@ -7,6 +7,11 @@ body {
   font-family: monospace;
   color: white;
   font-size: 2rem;
+  display: flex;
+}
+
+#ui > * {
+  margin-right: 40px;
 }
 
 button {
