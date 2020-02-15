@@ -60,6 +60,21 @@ class MainScene extends Phaser.Scene {
     this.resetting = false;
 
     window.resetLevel = () => this.scene.restart();
+    window.mute = () => {
+      const muteButton = document.getElementById("mute-button");
+
+      if (this.sound.mute) {
+        muteButton.style.backgroundColor = "#f4f4f4";
+        muteButton.style.color = "#1a1c2c";
+
+        this.sound.setMute(false);
+      } else {
+        muteButton.style.backgroundColor = "#3b5dc9";
+        muteButton.style.color = "#f4f4f4";
+
+        this.sound.setMute(true);
+      }
+    };
   }
 
   preload() {

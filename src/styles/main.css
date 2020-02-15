@@ -4,10 +4,14 @@ body {
   padding: 0;
 }
 
+p {
+  margin: 1rem;
+}
+
 #ui {
   position: absolute;
   font-family: monospace;
-  color: white;
+  color: #f4f4f4;
   font-size: 2rem;
   display: flex;
 }
@@ -18,7 +22,8 @@ body {
 
 button {
   font-family: monospace;
-  background: white;
+  background: #f4f4f4;
+  color: #1a1c2c;
   font-size: 2rem;
   border-radius: 4px;
 }
