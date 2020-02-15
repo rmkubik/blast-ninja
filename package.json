@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --public-url '.'"
+    "build": "npm run build:web && npm run compress",
+    "build:web": "parcel build src/index.html --public-url '.'",
+    "compress": "zip -r 'builds/hoisted.zip' dist"
   },
   "keywords": [],
   "author": "",
