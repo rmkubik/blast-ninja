@@ -12,6 +12,17 @@ import map7 from "../../assets/map7.json";
 import map8 from "../../assets/map8.json";
 import map9 from "../../assets/map9.json";
 
+import impact0 from "../../assets/sfx/impactWood_medium_000.ogg";
+import impact1 from "../../assets/sfx/impactWood_medium_001.ogg";
+import impact2 from "../../assets/sfx/impactWood_medium_002.ogg";
+import impact3 from "../../assets/sfx/impactWood_medium_003.ogg";
+import impact4 from "../../assets/sfx/impactWood_medium_004.ogg";
+import explosion0 from "../../assets/sfx/Blop-Mark_DiAngelo-79054334.mp3";
+import explosion1 from "../../assets/sfx/impactPlate_heavy_001.ogg";
+import explosion2 from "../../assets/sfx/impactPlate_heavy_002.ogg";
+import explosion3 from "../../assets/sfx/impactPlate_heavy_003.ogg";
+import explosion4 from "../../assets/sfx/impactPlate_heavy_004.ogg";
+
 const MAX_DISTANCE = 100;
 
 /**
@@ -58,11 +69,24 @@ class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map8", map8);
     this.load.tilemapTiledJSON("map9", map9);
     this.load.image("ninja", ninjaImage);
+    this.load.audio("impact0", impact0);
+    this.load.audio("impact1", impact1);
+    this.load.audio("impact2", impact2);
+    this.load.audio("impact3", impact3);
+    this.load.audio("impact4", impact4);
+    this.load.audio("explosion0", explosion0);
+    this.load.audio("explosion1", explosion1);
+    this.load.audio("explosion2", explosion2);
+    this.load.audio("explosion3", explosion3);
+    this.load.audio("explosion4", explosion4);
   }
 
   create() {
     this.bombCount = 0;
     const currentMap = this.levels[this.currentLevel];
+
+    this.impactSfx = this.sound.add("impact0");
+    this.explosionSfx = this.sound.add("explosion0");
 
     window.updateUI({
       bombCounter: this.bombCount,
@@ -144,11 +168,39 @@ class MainScene extends Phaser.Scene {
         ninja.body.setVelocity(explosionForce.x, explosionForce.y);
 
         this.emitter.explode(50, pointer.x, pointer.y);
+
+        this.explosionSfx.play();
       }
     });
 
     const FRICTION_VALUE = 2;
     this.physics.add.collider(ninja, layer, (ninja, tile) => {
+      if (
+        !ninja.body.wasTouching.up &&
+        ninja.body.blocked.up &&
+        Math.abs(ninja.body.velocity.y) > 2
+      ) {
+        this.impactSfx.play();
+      } else if (
+        !ninja.body.wasTouching.down &&
+        ninja.body.blocked.down &&
+        Math.abs(ninja.body.velocity.y) > 2
+      ) {
+        this.impactSfx.play();
+      } else if (
+        !ninja.body.wasTouching.left &&
+        ninja.body.blocked.left &&
+        Math.abs(ninja.body.velocity.x) > 2
+      ) {
+        this.impactSfx.play();
+      } else if (
+        !ninja.body.wasTouching.right &&
+        ninja.body.blocked.right &&
+        Math.abs(ninja.body.velocity.x) > 2
+      ) {
+        this.impactSfx.play();
+      }
+
       if (ninja.body.onFloor()) {
         if (ninja.body.velocity.x > 0) {
           const newVelocity = Phaser.Math.Clamp(
@@ -171,7 +223,7 @@ class MainScene extends Phaser.Scene {
 
   update() {
     if (
-      this.ninja.y < -100 ||
+      this.ninja.y > globals.height + 100 ||
       this.ninja.x < -100 ||
       this.ninja.x > globals.width + 100
     ) {
@@ -189,15 +241,16 @@ class MainScene extends Phaser.Scene {
         if (!this.resetting) {
           this.resetting = true;
           console.log("goal!");
-          setTimeout(
-            () => this.emitter.explode(50, ninja.x + 32, ninja.y - 48),
-            300
-          );
+          setTimeout(() => {
+            this.explosionSfx.play();
+            this.emitter.explode(50, ninja.x + 32, ninja.y - 48);
+          }, 300);
+          this.explosionSfx.play();
           this.emitter.explode(50, ninja.x, ninja.y - 64);
-          setTimeout(
-            () => this.emitter.explode(50, ninja.x - 32, ninja.y - 48),
-            600
-          );
+          setTimeout(() => {
+            this.explosionSfx.play();
+            this.emitter.explode(50, ninja.x - 32, ninja.y - 48);
+          }, 600);
 
           setTimeout(() => {
             this.currentLevel = (this.currentLevel + 1) % this.levels.length;
