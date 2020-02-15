@@ -17,15 +17,8 @@ import impact1 from "../../assets/sfx/impactWood_medium_001.ogg";
 import impact2 from "../../assets/sfx/impactWood_medium_002.ogg";
 import impact3 from "../../assets/sfx/impactWood_medium_003.ogg";
 import impact4 from "../../assets/sfx/impactWood_medium_004.ogg";
-/**
- * http://soundbible.com/2067-Blop.html
- * About: Blop or pop high pitch sound. maybe a bottle opening or suction cup. created by mark diangelo.
- * Title: Blop
- * Uploaded: 03.27.13
- * License: Attribution 3.0
- * Recorded by Mark DiAngelo
- */
 import explosion0 from "../../assets/sfx/Blop-Mark_DiAngelo-79054334.mp3";
+import mainTheme from "../../assets/tracks/alexander-nakarada-we-three-celtic-kings.mp3";
 import explosion1 from "../../assets/sfx/impactPlate_heavy_001.ogg";
 import explosion2 from "../../assets/sfx/impactPlate_heavy_002.ogg";
 import explosion3 from "../../assets/sfx/impactPlate_heavy_003.ogg";
@@ -75,6 +68,22 @@ class MainScene extends Phaser.Scene {
         this.sound.setMute(true);
       }
     };
+    window.credits = () => {
+      window.alert(`
+        We Three Celtic Kings by Alexander Nakarada | https://www.serpentsoundstudios.com
+        Music promoted by https://www.free-stock-music.com
+        Attribution 4.0 International (CC BY 4.0)
+        https://creativecommons.org/licenses/by/4.0/
+
+        http://soundbible.com/2067-Blop.html
+        About: Blop or pop high pitch sound. maybe a bottle opening or suction cup. created by mark diangelo.
+        Title: Blop
+        Uploaded: 03.27.13
+        License: Attribution 3.0
+        https://creativecommons.org/licenses/by/3.0/
+        Recorded by Mark DiAngelo
+      `);
+    };
   }
 
   preload() {
@@ -102,6 +111,7 @@ class MainScene extends Phaser.Scene {
     this.load.audio("explosion2", explosion2);
     this.load.audio("explosion3", explosion3);
     this.load.audio("explosion4", explosion4);
+    this.load.audio("mainTheme", mainTheme);
   }
 
   create() {
@@ -110,6 +120,8 @@ class MainScene extends Phaser.Scene {
 
     this.impactSfx = this.sound.add("impact0");
     this.explosionSfx = this.sound.add("explosion0");
+    this.mainTheme = this.sound.add("mainTheme");
+    this.mainTheme.play();
 
     window.updateUI({
       bombCounter: this.bombCount,
