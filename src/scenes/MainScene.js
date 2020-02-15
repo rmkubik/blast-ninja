@@ -17,6 +17,13 @@ import impact1 from "../../assets/sfx/impactWood_medium_001.ogg";
 import impact2 from "../../assets/sfx/impactWood_medium_002.ogg";
 import impact3 from "../../assets/sfx/impactWood_medium_003.ogg";
 import impact4 from "../../assets/sfx/impactWood_medium_004.ogg";
+/**
+ * About: Blop or pop high pitch sound. maybe a bottle opening or suction cup. created by mark diangelo.
+ * Title: Blop
+ * Uploaded: 03.27.13
+ * License: Attribution 3.0
+ * Recorded by Mark DiAngelo
+ */
 import explosion0 from "../../assets/sfx/Blop-Mark_DiAngelo-79054334.mp3";
 import explosion1 from "../../assets/sfx/impactPlate_heavy_001.ogg";
 import explosion2 from "../../assets/sfx/impactPlate_heavy_002.ogg";
