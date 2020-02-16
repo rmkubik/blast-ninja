@@ -18,6 +18,7 @@ import map11 from "../../assets/map11.json";
 import map12 from "../../assets/map12.json";
 import map13 from "../../assets/map13.json";
 import map14 from "../../assets/map14.json";
+import map15 from "../../assets/map15.json";
 
 import impact0 from "../../assets/sfx/impactWood_medium_000.ogg";
 import impact1 from "../../assets/sfx/impactWood_medium_001.ogg";
@@ -57,6 +58,7 @@ class LoadScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map12", map12);
     this.load.tilemapTiledJSON("map13", map13);
     this.load.tilemapTiledJSON("map14", map14);
+    this.load.tilemapTiledJSON("map15", map15);
     this.load.image("ninja", ninjaImage);
     this.load.audio("impact0", impact0);
     this.load.audio("impact1", impact1);

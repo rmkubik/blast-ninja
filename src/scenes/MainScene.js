@@ -15,7 +15,7 @@ class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
 
-    this.currentLevel = 0;
+    this.currentLevel = 14;
     this.levels = [
       { name: "map1", par: 3 },
       { name: "map2", par: 2 },
@@ -30,7 +30,8 @@ class MainScene extends Phaser.Scene {
       { name: "map11", par: 3 },
       { name: "map12", par: 2 },
       { name: "map13", par: 3 },
-      { name: "map14", par: 5 }
+      { name: "map14", par: 5 },
+      { name: "map15", par: 5 }
     ];
     this.resetting = false;
 
