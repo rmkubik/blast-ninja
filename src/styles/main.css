@@ -5,15 +5,16 @@ body {
 }
 
 p {
-  margin: 1rem;
+  margin: 0;
 }
 
 #ui {
+  margin: 1rem;
   display: none;
   position: absolute;
   font-family: monospace;
   color: #f4f4f4;
-  font-size: 2rem;
+  font-size: 1.5rem;
   /* display: flex; */
 }
 
@@ -25,7 +26,7 @@ button {
   font-family: monospace;
   background: #f4f4f4;
   color: #1a1c2c;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-radius: 4px;
 }
 
