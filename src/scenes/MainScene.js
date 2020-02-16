@@ -120,8 +120,10 @@ class MainScene extends Phaser.Scene {
 
     this.impactSfx = this.sound.add("impact0");
     this.explosionSfx = this.sound.add("explosion0");
-    this.mainTheme = this.sound.add("mainTheme");
-    this.mainTheme.play();
+    if (!this.mainTheme || (this.mainTheme && !this.mainTheme.isPlaying)) {
+      this.mainTheme = this.sound.add("mainTheme");
+      this.mainTheme.play();
+    }
 
     window.updateUI({
       bombCounter: this.bombCount,
