@@ -61,14 +61,17 @@ class LoadScene extends Phaser.Scene {
     this.load.audio("mainTheme", mainTheme);
     this.load.start();
 
-    this.load.once("progress", value => {
+    this.load.on("progress", value => {
       this.loadingBar.value = value * 100;
     });
-    this.load.once("complete", () => {
+    this.load.on("complete", () => {
       this.loadingBar.value = 100;
       document.getElementById("ui").style.display = "flex";
       document.getElementById("progress").style.display = "none";
       this.scene.start("main");
+    });
+    this.load.on("fileprogress", function(file) {
+      document.getElementById("loaded").innerHTML = file.src;
     });
   }
 
