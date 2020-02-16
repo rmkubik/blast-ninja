@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import MainScene from "./scenes/MainScene";
+import LoadScene from "./scenes/LoadScene";
 import globals from "./globals";
 
 /**
@@ -31,7 +32,7 @@ const config = {
   /**
    * An array of all the scenes that will be used in our game
    */
-  scene: [MainScene],
+  scene: [LoadScene, MainScene],
   /**
    * Fixes all rendered assets to a pixel perfect grid
    */
